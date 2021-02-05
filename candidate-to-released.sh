@@ -7,6 +7,12 @@ usage() {
 }
 [[ -z "$VERREL" ]] && VERREL="$1"
 [[ -z "$VERREL" ]] && usage
-brew move-pkg dist-5E-eso{-candidate,} beaker-system-scan-$VERREL.el5
-brew move-pkg eng-rhel-6{-candidate,} beaker-system-scan-$VERREL.el6eng
-brew move-pkg eng-rhel-7{-candidate,} beaker-system-scan-$VERREL.el7eng
+
+brew move-build beaker-harness-rhel-5{-candidate,} beaker-system-scan-$VERREL.el5bkr
+brew move-build beaker-harness-rhel-6{-candidate,} beaker-system-scan-$VERREL.el6bkr
+brew move-build beaker-harness-rhel-7{-candidate,} beaker-system-scan-$VERREL.el7bkr
+brew move-build beaker-harness-rhel-8{-candidate,} beaker-system-scan-$VERREL.el8bkr
+brew move-build eng-fedora-31{-candidate,} beaker-system-scan-$VERREL.fc31eng
+brew move-build eng-fedora-32{-candidate,} beaker-system-scan-$VERREL.fc32eng
+brew move-build eng-fedora-33{-candidate,} beaker-system-scan-$VERREL.fc33eng
+brew move-build eng-fedora-34{-candidate,} beaker-system-scan-$VERREL.fc34eng
