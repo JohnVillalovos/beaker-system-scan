@@ -31,7 +31,7 @@
 
 Name:           beaker-system-scan
 Version:        2.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Collect and upload hardware information to Beaker
 Group:          Applications/System
 License:        GPLv2+
@@ -124,6 +124,10 @@ PYTHONPATH=. py.test -vv tests/
 %{_bindir}/%{name}
 
 %changelog
+* Fri Feb 05 2021 Renan Rodrigo <rebarbos@redhat.com> 2.5-2
+- Update dist-git repos (rebarbos@redhat.com)
+- fix: checking asumptions when counting interfaces (mdujava@redhat.com)
+
 * Wed Oct 23 2019 Martin Styk <mastyk@redhat.com> 2.5-1
 - Threat all ethernet devices correctly, not only eth* (mdujava@redhat.com)
 - Update dist-git branches (mastyk@redhat.com)
