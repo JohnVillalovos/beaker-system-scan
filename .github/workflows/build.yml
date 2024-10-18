@@ -1,0 +1,34 @@
+name: Build RPM
+
+# If a pull-request is pushed then cancel all previously running jobs related
+# to that pull-request
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build RPM packages
+    container:
+      image: fedora:40
+    steps:
+      - name: Install git and tito
+        run: |
+          dnf install -y git tito
+      # Install git before doing `actions/checkout` so that we get our `.git/`
+      # directory
+      - uses: actions/checkout@v4.2.1
+        with:
+          fetch-depth: 0
+      - name: Install dependencies of the SPEC file
+        run: |
+          dnf builddep -y beaker-system-scan.spec
+      - name: Specify git safe directory so tito will work
+        run: |
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+      - name: Build RPM
+        run: |
+          tito build --rpm --output ./tito/
